@@ -17,7 +17,7 @@
   }
   /* Display 1 Bold */
   .display-1-bold {
-    @apply text-4xl leading-10 font-bold;
+    @apply text-[32px] leading-10 font-bold;
   }
 
   /* Display 2 Bold */
@@ -121,5 +121,90 @@
   }
   .sidebar-icon_border {
     border: 1.5px solid rgba(85, 89, 125, 1);
+  }
+  .upload-button {
+    /* Button */
+
+    /* Auto layout */
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 8px 14px;
+    gap: 8px;
+
+    width: 199px;
+    height: 36px;
+
+    /* Black/700 */
+    background: #1d2032;
+    /* Button/Secondary/normal */
+    box-shadow:
+      0px 1px 1px rgba(18, 18, 18, 0.1),
+      0px 0px 0px 1px rgba(18, 18, 18, 0.07),
+      0px 1px 3px rgba(18, 18, 18, 0.1);
+    border-radius: 5px;
+
+    /* Inside auto layout */
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+  }
+  .profile-input {
+    @apply w-full rounded-[4px] h-[38px]  bg-black-700 text-white-100;
+  }
+  .profile-goals-wrapper {
+    @apply paragraph-3-regular flex flex-row justify-between gap-[14px] w-full;
+  }
+  .profile-goals {
+    @apply px-3 py-3.5;
+  }
+
+  .profile-sidebar-wrapper {
+    @apply w-full flex flex-col justify-start gap-[6px] mt[50px] ml-[28px] absolute;
+  }
+  .profile-sidebar-avatar-wrapper {
+    @apply flex flex-row size-9 rounded-[2px];
+  }
+  .sidebar-avatar {
+    @apply size-9 rounded-[2px];
+  }
+  .profile-sidebar-details {
+    /* title */
+
+    /* Auto layout */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px;
+
+    width: 118px;
+    height: 36px;
+
+    @apply order-1 flex-grow-0 flex-col;
+  }
+  .vertical-divider {
+    /* Line 3 */
+
+    width: 20px;
+    height: 0px;
+
+    /* White/300 */
+    border: 1px solid #adb3cc;
+    transform: rotate(90deg);
+    background: #1d2032;
+    box-shadow:
+      0px 4px 4px rgba(0, 0, 0, 0.25),
+      0px 1px 1px rgba(18, 18, 18, 0.1);
+    align-self: stretch;
+    @apply w-[1px] h-[36px] bg-black-800;
+  }
+  .profile-shadow {
+    box-shadow:
+      0px 4px 4px rgba(0, 0, 0, 0.25),
+      0px 1px 1px rgba(18, 18, 18, 0.1);
+  }
+  .tech-badges {
+    @apply px-0.5 py-1 gap-1 rounded-[3px] bg-black-600 text-white-100 h-[24px] border-[1px] w-full;
   }
 }

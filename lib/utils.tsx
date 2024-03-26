@@ -4,6 +4,18 @@ import { getToken } from "next-auth/jwt";
 import qs from "query-string";
 import type { NextApiRequest, NextApiResponse } from "next";
 import bcrypt from "bcryptjs";
+import {
+  DiCss3,
+  DiGithub,
+  DiHtml5,
+  DiJava,
+  DiJavascript,
+  DiLaravel,
+  DiNodejs,
+  DiPython,
+  DiReact,
+} from "react-icons/di";
+import { BiLogoTailwindCss, BiLogoTypescript } from "react-icons/bi";
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
@@ -56,5 +68,35 @@ export const validatePassword = async (
     return true;
   } else {
     throw new Error("Passwords don't match.");
+  }
+};
+
+export const turnNameToIcon = (iconName: string) => {
+  switch (iconName.toLowerCase()) {
+    case "react":
+      console.log("react");
+      return <DiReact />;
+    case "nodejs":
+      return <DiNodejs />;
+    case "javascript":
+      return <DiJavascript />;
+    case "python":
+      return <DiPython />;
+    case "java":
+      return <DiJava />;
+    case "html5":
+      return <DiHtml5 />;
+    case "css3":
+      return <DiCss3 />;
+    case "typescript":
+      return <BiLogoTypescript />;
+    case "tailwind css":
+      return <BiLogoTailwindCss />;
+    case "laravel":
+      return <DiLaravel />;
+    case "github":
+      return <DiGithub />;
+    default:
+      return <DiReact />;
   }
 };

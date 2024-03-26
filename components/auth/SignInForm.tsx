@@ -20,15 +20,15 @@ const SignInForm = () => {
   const form = useForm<z.infer<typeof signInSchema>>({
     resolver: zodResolver(signInSchema),
     defaultValues: {
-      username: "",
+      email: "",
       password: "",
     },
   });
   const onSubmit = async () => {
-    const { username, password } = form.getValues();
+    const { email, password } = form.getValues();
     await signIn("credentials", {
       redirect: true,
-      username,
+      email,
       password,
       callbackUrl: "/",
     });
@@ -41,7 +41,7 @@ const SignInForm = () => {
         </span>
         <FormField
           control={form.control}
-          name="username"
+          name="email"
           render={({ field }) => (
             <FormItem>
               <FormLabel className="paragraph-3-medium text-white-300">

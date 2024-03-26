@@ -1,5 +1,7 @@
+"use server";
+// in .ts files need use server
 import dbConnect from "@/database/dbConnect";
-import User, { IUser } from "@/database/models/user.model";
+
 import { revalidatePath } from "next/cache";
 import {
   UpdateUserParams,
@@ -8,6 +10,8 @@ import {
 } from "./shared.types";
 
 import bcryptjs from "bcryptjs";
+import User, { IUser } from "@/database/models/user.model";
+import { getSession } from "../authOptions";
 
 export const getOneUser = async (email: string) => {
   try {
@@ -28,17 +32,24 @@ export const getUserById = async ({ _id }: { _id: string }) => {
     console.log(error);
   }
 };
-
-export async function updateUser(params: UpdateUserParams) {
+// having issues with  forms and updating user data
+export async function updateUser({ updateData, path }: UpdateUserParams) {
   try {
     await dbConnect();
+    const session = await getSession();
+    if (!session?.user?.email) {
+      throw new Error("You are not authorized to update this user");
+    }
+    console.log(updateData);
+    const user = await User.findOneAndUpdate(
+      { email: session.user.email },
+      updateData,
+      {
+        new: true,
+      }
+    );
 
-    const { _id, updateData, path } = params;
-
-    await User.findOneAndUpdate({ _id }, updateData, {
-      new: true,
-    });
-
+    console.log(user);
     revalidatePath(path);
   } catch (error) {
     console.log(error);
@@ -55,7 +66,7 @@ export const createNewUser = async (userData: CreateUserParams) => {
       password: hashedPassword,
     });
 
-    return newUser as IUser;
+    return { user: newUser, ok: true };
   } catch (error) {
     console.log(error);
   }

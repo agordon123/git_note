@@ -1,3 +1,4 @@
+"use server";
 import postModel, { IPost } from "@/database/models/post.model";
 import { revalidatePath } from "next/cache";
 import dbConnect from "@/database/dbConnect";

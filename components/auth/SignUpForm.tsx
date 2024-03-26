@@ -16,6 +16,7 @@ import {
 import { z } from "zod";
 import { signUpSchema } from "@/lib/validations";
 import { signIn } from "next-auth/react";
+import { createNewUser } from "@/lib/actions/user.actions";
 const SignUpForm = () => {
   const [message, setMessage] = useState<string>("");
   const [formError, setFormError] = useState<string>("");
@@ -24,37 +25,29 @@ const SignUpForm = () => {
     resolver: zodResolver(signUpSchema),
     defaultValues: {
       fullname: "",
-      username: "",
+      email: "",
       password: "",
     },
   });
 
   const onSubmit = async () => {
-    const { fullname, username, password } = form.getValues();
+    const { fullname, email, password } = form.getValues();
 
     try {
       startTransition(async () => {
-        const res = await fetch("/api/register", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ fullname, username, password }),
-        });
+        const res = await createNewUser({ fullname, email, password });
 
-        if (res.ok) {
+        if (res?.ok)
           await signIn("credentials", {
             redirect: true,
-            username,
+            email,
             password,
-            callbackUrl: "/",
+            callbackUrl: `${window.location.origin}`,
           });
-        } else {
-          setFormError(res.statusText);
-        }
       });
     } catch (err: any) {
       setMessage(err);
+      setFormError(err);
     }
   };
 
@@ -79,7 +72,7 @@ const SignUpForm = () => {
         />
         <FormField
           control={form.control}
-          name="username"
+          name="email"
           render={({ field }) => (
             <FormItem>
               <FormLabel className="paragraph-3-medium text-left ">
@@ -119,7 +112,7 @@ const SignUpForm = () => {
           <span className="paragraph-3-medium text-red-600">{formError}</span>
         )}
         <CustomButton buttonType="primary" type="submit" disabled={isPending}>
-          Sign Up
+          Create An Account
         </CustomButton>
       </form>
     </Form>

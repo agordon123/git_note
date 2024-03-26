@@ -3,14 +3,17 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import React from "react";
 
-const inter = Inter({ subsets: ["latin"], weight: ["200"] });
+const inter = Inter({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+});
 
 export const metadata: Metadata = {
   title: "GitNote - Personal Git Notebook",
   description:
     "A platform for Software Developers to store information and knowledge.",
   icons: {
-    icon: "/assets/images/site-logo.svg",
+    icon: "/assets/images/site-logo.png",
   },
 };
 

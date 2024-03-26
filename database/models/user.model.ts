@@ -1,8 +1,8 @@
 import { Schema, Document, model, models } from "mongoose";
 
 export interface IUser extends Document {
-  _id: Schema.Types.ObjectId;
-  fullname: string;
+  _id: string;
+  fullname?: string;
   email: string;
   password: string;
   image: string;
@@ -10,16 +10,30 @@ export interface IUser extends Document {
   createdAt: Date;
   updatedAt: Date;
   portfolio?: string;
-  learningGoals?: string[];
+  learningGoals?: {
+    name: string;
+    completed: boolean;
+  }[];
   role?: "user" | "admin";
-  technologyStack?: string[];
-  experienceLevel?: string[];
-  availability?: Date[];
-  tags?: string[];
-  socials?: string[];
+  technologies?: string[];
+  experiences: string[];
+  startTime: Date;
+  endTime: Date;
+  newProjects?: boolean;
+  socials?: {
+    twitter?: string;
+    facebook?: string;
+    linkedin?: string;
+    github?: string;
+    instagram?: string;
+    dribbble?: string;
+  }[];
   posts?: Schema.Types.ObjectId[];
 }
-
+const GoalSchema = new Schema({
+  name: { type: String, required: true },
+  completed: { type: Boolean, required: true },
+});
 const SocialsSchema = new Schema({
   twitter: {
     type: String,
@@ -44,12 +58,6 @@ const SocialsSchema = new Schema({
   dribbble: {
     type: String,
     required: false,
-  },
-});
-const technologyStackSchema = new Schema({
-  name: {
-    type: String,
-    required: true,
   },
 });
 
@@ -81,30 +89,37 @@ const UserSchema = new Schema(
       type: String,
       required: false,
     },
-    learningGoals: {
-      type: [String],
-      required: false,
-    },
+    learningGoals: [
+      {
+        type: GoalSchema,
+        required: false,
+      },
+    ],
     role: {
       type: String,
       required: false,
       default: "user",
     },
-    technologyStack: {
-      type: technologyStackSchema,
+    technologies: {
+      type: [String],
       required: false,
+      unique: true,
     },
-    experienceLevel: {
+
+    experiences: {
       type: [String],
       required: false,
     },
-    availability: {
-      type: [Date],
+    startTime: {
+      type: Date,
       required: false,
     },
-    tags: {
-      type: [Schema.Types.ObjectId],
-      ref: "Tag",
+    endTime: {
+      type: Date,
+      required: false,
+    },
+    newProjects: {
+      type: Boolean,
       required: false,
     },
     socials: {
@@ -120,4 +135,4 @@ const UserSchema = new Schema(
   { timestamps: true }
 );
 
-export default models.User || model<IUser>("User", UserSchema);
+export default models?.User || model<IUser>("User", UserSchema);

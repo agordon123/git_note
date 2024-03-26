@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import "react-day-picker/dist/style.css";
+
+@layer utilities {
+  .border-top {
+    @apply border-t-white-500;
+  }
+  .rdp-button {
+    @apply bg-primary-500 text-primary-foreground;
+  }
+  .rdy-day-selected:-moz-focusring {
+    @apply bg-primary-500 text-white-100;
+  }
+}

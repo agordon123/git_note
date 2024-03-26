@@ -27,6 +27,9 @@ const config = {
         regular: "400",
         medium: "500",
       },
+      accentColor: {
+        check: "#42FF77",
+      },
       colors: {
         "gradient-start": "#43B7FE",
         "gradient-end": "#4F48E6",
@@ -34,6 +37,9 @@ const config = {
           "500": "#42BBFF",
           "800": "#0C3247",
           "900": "rgba(66, 187, 255, 0.1)",
+        },
+        shadow: {
+          "100": "#4448691A",
         },
         black: {
           "600": "#2E3757",

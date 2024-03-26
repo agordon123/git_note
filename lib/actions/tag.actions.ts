@@ -1,3 +1,4 @@
+"use server";
 import dbConnect from "@/database/dbConnect";
 import {
   GetTagByPostIdParams,
@@ -24,7 +25,7 @@ export const updateTag = async (params: UpdateTagParams) => {
   try {
     await dbConnect();
     const { _id, updateData, path } = params;
-    await tagModel.findOneAndUpdate(_id, updateData);
+    await tagModel.findOneAndUpdate({ _id }, updateData);
     revalidatePath(path);
   } catch (error) {
     console.log(error);

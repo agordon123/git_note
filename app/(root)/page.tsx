@@ -19,7 +19,7 @@ export default async function Home() {
       <SignOutButton />
 
       <Link href={`/profile/${mongoUser?.id!}`}>
-        <button className="heading-2-bold  size-[500px] bg-yellow-500">
+        <button className="heading-2-bold  bg-primary size-[200px]">
           Profile
         </button>
       </Link>

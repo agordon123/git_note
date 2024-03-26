@@ -63,17 +63,16 @@ export interface SearchParams {
   type?: string | null;
 }
 export interface UpdatePostParams {
-  _id: Schema.Types.ObjectId;
+  _id: string;
   updateData: Partial<IPost>;
   path: string;
 }
 export interface UpdateTagParams {
-  _id: Schema.Types.ObjectId;
+  _id: string;
   updateData: Partial<ITag>;
   path: string;
 }
 export interface UpdateUserParams {
-  _id: Schema.Types.ObjectId;
   updateData: Partial<IUser>;
   path: string;
 }
