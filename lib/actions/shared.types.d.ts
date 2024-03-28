@@ -65,16 +65,13 @@ export interface SearchParams {
 export interface UpdatePostParams {
   _id: string;
   updateData: Partial<IPost>;
-  path: string;
 }
 export interface UpdateTagParams {
   _id: string;
   updateData: Partial<ITag>;
-  path: string;
 }
 export interface UpdateUserParams {
   updateData: Partial<IUser>;
-  path: string;
 }
 
 export interface DeletePostParams {

@@ -17,6 +17,7 @@ interface EditAvailabilityProps {
   handleDaySelectTo: any;
   control: any;
   register: any;
+  className?: string;
 }
 const css = `
   .my-selected:not([disabled]) { 
@@ -49,6 +50,7 @@ const EditAvailability = ({
   control,
   handleDaySelectFrom,
   handleDaySelectTo,
+  className,
 }: EditAvailabilityProps) => {
   return (
     <section className="border-top  box-border flex flex-col items-start">

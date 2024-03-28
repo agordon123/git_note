@@ -98,3 +98,16 @@ rdp {
 .rdp-caption_label {
   color: white;
 }
+[data-state="completed"] {
+  background-color: #42bbff;
+  color: black;
+}
+
+[data-state="current"] {
+  background-color: #42bbff;
+  color: #e7edff;
+}
+
+[data-state="incomplete"] {
+  @apply bg-black-600;
+}

@@ -33,13 +33,20 @@ const UploadPhoto = ({ image, className }: UploadPhotoProps) => {
   return (
     <>
       <div className="inline-flex flex-row items-center gap-x-[14px] space-y-2 align-middle">
-        <Image
-          src={image!}
-          alt="profile picture"
-          width={90}
-          height={90}
-          className="inset-inline-start "
-        />
+        {image && (
+          <Image
+            src={image!}
+            alt="profile picture"
+            width={90}
+            height={90}
+            className="inset-inline-start "
+          />
+        )}
+        {!image && (
+          <div className="bg-black-500 flex size-[90px] items-center justify-center rounded-[5px]">
+            <LuUploadCloud size={32} />
+          </div>
+        )}
         <form onSubmit={handleSubmit(onSubmit)}>
           <Input
             type="file"

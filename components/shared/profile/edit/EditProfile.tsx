@@ -1,7 +1,6 @@
 "use client";
 import { IUser } from "@/database/models/user.model";
 import React, { useEffect } from "react";
-import { usePathname } from "next/navigation";
 import { updateUser } from "@/lib/actions/user.actions";
 import {
   useForm,
@@ -26,8 +25,6 @@ interface EditProfileProps {
 }
 
 const EditProfile = ({ user }: EditProfileProps) => {
-  const pathname = usePathname();
-
   const dbGoals = user?.learningGoals?.map((goal, idx) => ({
     name: goal.name,
     completed: goal.completed,
@@ -150,7 +147,6 @@ const EditProfile = ({ user }: EditProfileProps) => {
             endTime,
             newProjects,
           },
-          path: pathname,
         });
       } catch (error) {
         console.log(error);

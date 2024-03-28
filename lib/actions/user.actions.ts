@@ -2,7 +2,6 @@
 // in .ts files need use server
 import dbConnect from "@/database/dbConnect";
 
-import { revalidatePath } from "next/cache";
 import {
   UpdateUserParams,
   CreateUserParams,
@@ -33,24 +32,17 @@ export const getUserById = async ({ _id }: { _id: string }) => {
   }
 };
 // having issues with  forms and updating user data
-export async function updateUser({ updateData, path }: UpdateUserParams) {
+export async function updateUser({ updateData }: UpdateUserParams) {
   try {
     await dbConnect();
     const session = await getSession();
     if (!session?.user?.email) {
       throw new Error("You are not authorized to update this user");
     }
-    console.log(updateData);
-    const user = await User.findOneAndUpdate(
-      { email: session.user.email },
-      updateData,
-      {
-        new: true,
-      }
-    );
 
-    console.log(user);
-    revalidatePath(path);
+    await User.findOneAndUpdate({ email: session.user.email }, updateData, {
+      new: true,
+    });
   } catch (error) {
     console.log(error);
     throw error;

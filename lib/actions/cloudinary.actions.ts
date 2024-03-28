@@ -8,7 +8,7 @@ export const uploadImage = async (file: any) => {
   if (!session) {
     throw new Error("You must be logged in to upload an image");
   }
-  const email = session?.user?.email as string;
+
   cloudinary.config({
     cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
     api_key: process.env.CLOUDINARY_API_KEY,
@@ -18,9 +18,7 @@ export const uploadImage = async (file: any) => {
     folder: "gitnote",
   });
   await updateUser({
-    email,
     updateData: { image: result.secure_url },
-    path: "/",
   });
 
   return result.secure_url;

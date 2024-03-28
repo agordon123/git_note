@@ -10,6 +10,7 @@ interface EditExperienceProps {
   removeExperience: (index: number) => void;
   appendExperience: (experience: { name: string }) => void;
   register: any;
+  className?: string;
 }
 const EditExperience = ({
   experienceFields,
